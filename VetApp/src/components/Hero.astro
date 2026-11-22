@@ -1,0 +1,114 @@
+---
+// src/components/Hero.astro
+
+const {
+  companyName = "Company Name",
+  slogan = "Your slogan goes here"
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="brand-box">
+      <h1 class="company-name">{companyName}</h1>
+      <p class="slogan">{slogan}</p>
+      <slot />
+    </div>
+    <div class="button-group">
+      <button class="button">Become a Member</button>
+    </div>
+  </div>
+</section>
+
+
+<style>
+
+/* ====== Import Fonts ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+  /* ===== Hero Section ===== */
+.hero {
+    padding: 4rem 4rem 4rem;
+    background: linear-gradient(135deg, #FE5F55 30%, #F2495C 50%, #E63462 80%
+     100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 30vh;
+    display: flex;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    color: #FFFF;
+    justify-content: center;
+    text-align: left;
+}
+
+  /* Row layout: brand box on the left, button on the right */
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap; /* Stacks on small screens */
+  }
+
+  /* ===== Company name + slogan box ===== */
+  .brand-box {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    max-width: 32rem;
+  }
+
+  .company-name {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .slogan {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    margin: 0.5rem 0 0;
+    opacity: 0.9;
+  }
+
+  /* Button group with flexbox spacing */
+.button-group {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap; /* Allows buttons to wrap on small screens */
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.button {
+    background-color: #333745;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    color: #FFFFFF;
+    padding: 0.75rem 2rem; /* Slightly larger padding */
+    border-radius: 32px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+</style>
