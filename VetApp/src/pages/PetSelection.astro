@@ -1,0 +1,77 @@
+---
+---
+<layout>
+	<div class="mainPageBoxes">
+		<div class="ProfileBox">
+			<h2>Profile</h2>
+			<p>View and edit your profile information.</p>
+		</div>
+
+		<div class="petBoxes">
+			<h1>Pet Selection</h1>
+			<p>Select a pet to view their profile.</p>
+			<div class="petBox">
+				<img src="/images/dog.png" alt="Dog" width="100" height="100">
+				<h3>Homer</h3>
+				<button>View Pet Profile</button>
+			</div>
+
+			<div class="petBox">
+				<img src="/images/cat.png" alt="Cat" width="100" height="100">
+				<h3>Lisa</h3>
+				<button>View Pet Profile</button>
+			</div>
+
+			<div class="petBox">
+				<img src="/images/cat.png" alt="Cat" width="100" height="100">
+				<h3>Bart</h3>
+				<button>View Pet Profile</button>
+			</div>
+
+		</div>
+	</div>
+
+</layout>
+
+<style>
+
+	.mainPageBoxes {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		margin-top: 50px;
+		justify-content: space-between;
+		margin-left: 50px;
+		margin-right: 50px;
+	
+	}
+
+	.ProfileBox {
+		background-color: #494949;
+		padding: 20px;
+		border-radius: 10px;
+		width: 300px;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	.petBoxes {
+		background-color: #505050;
+		padding: 20px;
+		border-radius: 10px;
+		width: 300px;
+		text-align: center;
+	}
+
+	.petBox {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		background-color: #b9b9b9;
+		padding: 20px;
+		border-radius: 10px;
+		margin-bottom: 20px;
+		align-items: center;
+	}
+
+</style>
