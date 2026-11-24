@@ -1,0 +1,118 @@
+---
+const subscriptionsPageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/Subscriptions`;
+---
+
+<layout>
+    <div class="loginpage">
+        <div class="credential-fields">
+            <div class="username-field">
+                <label for="username">Username</label>
+                <input class="username-input" id="username" name="username" type="text" />
+            </div>
+            <div class="password-field">
+                <label for="password">Password</label>
+                <input class="password-input" id="password" name="password" type="password" />
+            </div>
+            <div class="password2-field">
+                <label for="password2">Confirm Password</label>
+                <input class="password-input2" id="password2" name="password2" type="password" />
+            </div>
+            <button
+                class="registerbutton"
+                type="button"
+                data-subscriptions-url={subscriptionsPageUrl}
+                disabled
+            >REGISTER</button>
+        </div>
+    </div>
+</layout>
+
+<script>
+    const passwordInput = document.querySelector<HTMLInputElement>("#password");
+    const confirmPasswordInput = document.querySelector<HTMLInputElement>("#password2");
+    const registerButton = document.querySelector<HTMLButtonElement>(".registerbutton");
+
+    if (!passwordInput || !confirmPasswordInput || !registerButton) {
+        throw new Error("Registration password fields or button were not found.");
+    }
+
+    const updateRegisterButton = () => {
+        registerButton.disabled = passwordInput.value !== confirmPasswordInput.value;
+    };
+
+    passwordInput.addEventListener("input", updateRegisterButton);
+    confirmPasswordInput.addEventListener("input", updateRegisterButton);
+    updateRegisterButton();
+    registerButton.addEventListener("click", () => {
+        const subscriptionsUrl = registerButton.dataset.subscriptionsUrl;
+
+        if (!subscriptionsUrl) {
+            throw new Error("Subscriptions page URL was not provided.");
+        }
+
+        sessionStorage.setItem("vetapp-logged-in", "true");
+        window.location.href = subscriptionsUrl;
+    });
+</script>
+
+<style>
+    .loginpage 
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 75%;
+        height: 75vh;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 16px;
+        transform: translate(-50%, -50%);
+        
+    }
+    .credential-fields {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        transform: translate(-50%, -50%);
+    }
+    .username-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .username-input {
+        height: 30px;
+        width: 300px;
+        border: 1px solid black;
+    }
+    .password-field,
+    .password2-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .username-field label,
+    .password-field label {
+        color: #333745;
+    }
+    .password-input,
+    .password-input2 {
+        height: 30px;
+        width: 300px;
+        border: 1px solid black;
+    }
+    .registerbutton{
+        background-color: white;
+        padding: 10px 24px;
+    }
+    :global(body){
+        margin: 0;
+        background-color: #333745;
+    }
+</style>

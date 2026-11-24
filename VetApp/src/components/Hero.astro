@@ -1,11 +1,12 @@
 ---
 // src/components/Hero.astro
-//
 
 const {
   companyName = "Company Name",
   slogan = "Your slogan goes here"
 } = Astro.props;
+const loginPageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/Login`;
+const subscriptionsPageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/Subscriptions`;
 ---
 
 <section class="hero">
@@ -16,11 +17,34 @@ const {
       <slot />
     </div>
     <div class="button-group">
-      <button class="button">Become a Member</button>
+      <a
+        class="button"
+        id="membership-button"
+        href={loginPageUrl}
+        data-subscriptions-url={subscriptionsPageUrl}
+      >Become a Member</a>
     </div>
   </div>
 </section>
 
+<script>
+  const membershipButton = document.querySelector<HTMLAnchorElement>("#membership-button");
+
+  if (!membershipButton) {
+    throw new Error("Membership button was not found.");
+  }
+
+  if (sessionStorage.getItem("vetapp-logged-in") === "true") {
+    const subscriptionsPageUrl = membershipButton.dataset.subscriptionsUrl;
+
+    if (!subscriptionsPageUrl) {
+      throw new Error("Subscriptions page URL was not provided.");
+    }
+
+    membershipButton.textContent = "Upgrade Your Subscription";
+    membershipButton.href = subscriptionsPageUrl;
+  }
+</script>
 
 <style>
 
@@ -88,6 +112,7 @@ const {
 }
 
 .button {
+    display: inline-block;
     background-color: #333745;
     border: none;
     font-family: 'Quicksand', sans-serif;
@@ -98,6 +123,7 @@ const {
     position: relative;
     z-index: 1;
     font-size: 1rem;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 

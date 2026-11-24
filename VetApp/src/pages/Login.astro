@@ -1,0 +1,100 @@
+---
+const registerPageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/Register`;
+const homePageUrl = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/`;
+
+---
+
+<layout>
+    <div class="loginpage">
+        <div class="credential-fields">
+            <div class="username-field">
+                <label for="username">Username</label>
+                <input class="username-input" id="username" name="username" type="text" />
+            </div>
+            <div class="password-field">
+                <label for="password">Password</label>
+                <input class="password-input" id="password" name="password" type="text" />
+            </div>
+            <a class="loginbutton" href={homePageUrl}>LOGIN</a>
+            <a class="register-link" href={registerPageUrl}>Don't have an account? Register!</a>
+        </div>
+    </div>
+</layout>
+
+<script>
+    const loginLink = document.querySelector<HTMLAnchorElement>(".loginbutton");
+
+    if (!loginLink) {
+        throw new Error("Login link was not found.");
+    }
+
+    loginLink.addEventListener("click", () => {
+        sessionStorage.setItem("vetapp-logged-in", "true");
+    });
+</script>
+
+<style>
+    .loginpage 
+    {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 75%;
+        height: 75vh;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 16px;
+        transform: translate(-50%, -50%);
+        
+    }
+    .credential-fields {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        transform: translate(-50%, -50%);
+    }
+    .username-field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .username-input {
+        height: 30px;
+        width: 300px;
+    }
+    .password-field{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .username-field label,
+    .password-field label {
+        color: #333745;
+    }
+    .password-input {
+        height: 30px;
+        width: 300px;
+    }
+    .loginbutton{
+        display: inline-block;
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px 24px;
+        color: #333745;
+        text-decoration: none;
+    }
+    .register-link {
+        color: #4da3ff;
+        font-size: 12px;
+    }
+    :global(body){
+        margin: 0;
+        background-color: #333745;
+    }
+</style>
